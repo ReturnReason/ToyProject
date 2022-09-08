@@ -1,0 +1,19 @@
+:root {
+  --gray-color: #1e1e1e;
+  --violet-color: #645caa;
+  --violet-color50: #645caa0b;
+}
+
+@font-face {
+  font-family: 'LeferiPoint-WhiteObliqueA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Playfair+Display:wght@400;700&display=swap');
+
+body {
+  font-family: 'LeferiPoint-WhiteObliqueA';
+  color: var(--gray-color);
+}
