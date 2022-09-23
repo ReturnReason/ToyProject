@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>유토의 TO DO LIST</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="bg">
+      <div class="todolist">
+        <div class="todolist-header">
+          <h2 class="title">TO DO LIST</h2>
+        </div>
+
+        <div class="todolist-body">
+          <form class="todo-form">
+            <input type="text" placeholder="할 일 입력" />
+            <button>추가</button>
+          </form>
+
+          <div class="todos">
+            <div class="todo">
+              <input type="checkbox" id="checkbox" />
+              <label for="checkbox"></label>
+              <span id="todo">할일</span>
+              <label for="todo" style="display: none">할일</label>
+              <div class="todo-buttons">
+                <button class="todo-edit-button">수정</button>
+                <button class="todo-delete-button">삭제</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

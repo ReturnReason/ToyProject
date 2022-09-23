@@ -1,0 +1,86 @@
+.bg {
+  height: 100vh;
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todolist {
+  background: #fff;
+  border-radius: 5px;
+  height: 450px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 5px 10px rgba(156, 156, 156, 0.1);
+  overflow: hidden;
+}
+
+.todolist-header {
+  background: #242f40;
+  width: 100%;
+  padding: 20px;
+}
+
+.todolist-header .title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #f5be35;
+}
+
+.todolist-body {
+  width: 100%;
+  padding: 10px;
+}
+
+.todolist-body .todo-form {
+  display: flex;
+  justify-content: center;
+}
+
+.todolist-body .todo-form input {
+  width: 100%;
+}
+.todolist-body .todo-form button {
+  width: 20%;
+  margin: 5px;
+  margin-left: 0;
+  background: #242f40;
+  color: #fff;
+}
+
+.todos {
+  overflow: scroll;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.todo span {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.todo .todo-buttons .todo-edit-button,
+.todo .todo-buttons .todo-delete-button {
+  padding: 5px 10px;
+  margin-left: 5px;
+}
+
+.todo-edit-button:hover {
+  background: #ebebeb;
+}
+
+.todo-delete-button {
+  background: #f5be35;
+  color: #242f40;
+}
+
+.todo-delete-button:hover {
+  background: #f4b515;
+}
