@@ -6,11 +6,11 @@
   };
 
   const $todolist = get('.todos');
+  const $todoForm = get('.todo-form');
+  const $todosContainer = get('.todos');
 
   const createTodoElement = (todo) => {
     const { id, title, completed } = todo;
-    console.log(todo);
-    console.log(id);
     const $todoItem = document.createElement('div');
     $todoItem.dataset.id = id;
     $todoItem.classList.add('todo');
@@ -38,6 +38,8 @@
   };
 
   const getTodos = () => {
+    $todolist.innerHTML = '';
+
     fetch(API_URL)
       .then((response) => response.json())
       .then((todo) => {
@@ -46,8 +48,55 @@
       .catch((error) => console.error(error));
   };
 
+  const addTodo = (e) => {
+    e.preventDefault();
+
+    const $input = $todoForm.querySelector('input[type="text"]');
+    const todoValue = $input.value;
+    const todo = {
+      completed: false,
+      title: todoValue,
+    };
+
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        getTodos();
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const deleteTodo = (e) => {
+    if (e.target.className !== 'todo-delete-button') return;
+    const $removeTarget = e.target.closest('.todo');
+    const id = $removeTarget.dataset.id;
+
+    fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((response) => {
+        response.json();
+      })
+      .then(() => {
+        getTodos();
+      })
+      .catch((error) => console.error(error));
+  };
+
   const init = () => {
     window.addEventListener('DOMContentLoaded', getTodos);
+    $todoForm.addEventListener('submit', addTodo);
+    $todosContainer.addEventListener('click', deleteTodo);
   };
 
   init();
