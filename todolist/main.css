@@ -55,32 +55,65 @@
   overflow: scroll;
 }
 
+.todos input[type='checkbox'] {
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
 .todo {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  height: 35px;
 }
 
-.todo span {
-  flex: 1;
+#todo-input {
   margin-left: 10px;
+  flex: 2;
+  display: none;
+  border: 1px solid #eee;
+  padding: 5px;
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#todo-label {
+  margin-left: 5px;
+  flex: 2;
+  padding: 5px;
+  padding-left: 8px;
 }
 
 .todo .todo-buttons .todo-edit-button,
-.todo .todo-buttons .todo-delete-button {
+.todo .todo-buttons .todo-delete-button,
+.modify-buttons .todo-ok-button,
+.modify-buttons .todo-cancel-button {
   padding: 5px 10px;
   margin-left: 5px;
 }
 
-.todo-edit-button:hover {
+.modify-buttons {
+  display: none;
+}
+
+.todo-edit-button:hover,
+.todo-ok-button:hover {
   background: #ebebeb;
 }
 
-.todo-delete-button {
+.todo-delete-button,
+.todo-cancel-button {
   background: #f5be35;
   color: #242f40;
 }
 
-.todo-delete-button:hover {
+.todo-delete-button:hover,
+.todo-cancel-button:hover {
   background: #f4b515;
 }
