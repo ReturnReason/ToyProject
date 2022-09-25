@@ -9,7 +9,6 @@
 .todolist {
   background: #fff;
   border-radius: 5px;
-  height: 450px;
   width: 450px;
   display: flex;
   flex-direction: column;
@@ -53,6 +52,7 @@
 
 .todos {
   overflow: scroll;
+  height: 400px;
 }
 
 .todos input[type='checkbox'] {
