@@ -122,3 +122,19 @@
   text-decoration-line: line-through;
   color: #aaa;
 }
+
+/* 페이지네이션 버튼 */
+.pagination-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pagination-btns {
+  background-color: transparent;
+  font-weight: bold;
+}
+
+.current {
+  color: #f4b515;
+}
