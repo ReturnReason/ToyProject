@@ -117,3 +117,8 @@
 .todo-cancel-button:hover {
   background: #f4b515;
 }
+
+.checked {
+  text-decoration-line: line-through;
+  color: #aaa;
+}

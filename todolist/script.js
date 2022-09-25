@@ -10,14 +10,15 @@
   const $todosContainer = get('.todos');
 
   const createTodoElement = (todo) => {
-    const { id, title, completed } = todo;
+    const { id, title } = todo;
+    const checked = todo.completed ? 'checked' : '';
     const $todoItem = document.createElement('div');
     $todoItem.dataset.id = id;
     $todoItem.classList.add('todo');
     $todoItem.innerHTML = `
-      <input type="checkbox" id="checkbox" />
-      <input id="todo-input" value=${title}>
-      <label id="todo-label" for="todo" >${title}</label>
+      <input type="checkbox" id="checkbox" ${checked} />
+      <input id="todo-input" >
+      <label class="${checked}" id="todo-label" for="todo" >${title}</label>
       <div class="todo-buttons">
         <button class="todo-edit-button">수정</button>
         <button class="todo-delete-button">삭제</button>
@@ -100,21 +101,17 @@
       .catch((error) => console.error(error));
   };
 
-  const modifyTodo = (e) => {
+  const changeModifyMode = (e) => {
     const $todo = e.target.closest('.todo');
     const $todoInput = $todo.querySelector('#todo-input');
     const $todoLabel = $todo.querySelector('label');
-    const todoValue = $todoInput.value;
-    const id = $todo.dataset.id;
+
+    const todoValue = $todoLabel.innerText;
 
     const $todoButtons = $todo.querySelector('.todo-buttons');
     const $modifyButtons = $todo.querySelector('.modify-buttons');
 
     if (e.target.className === 'todo-edit-button') {
-      // 수정 버튼을 누르면 기존 수정, 삭제 버튼 안보이게 하고
-      // 확인, 취소 버튼 보이게 만들기.
-      // 확인 버튼 누르면 fetch로 값 업데이트시키기
-
       $todoButtons.style.display = 'none';
       $modifyButtons.style.display = 'block';
       $todoLabel.style.display = 'none';
@@ -125,12 +122,7 @@
       $todoInput.value = todoValue;
     }
 
-    if (e.target.className === 'todo-ok-button') {
-      // 수정 확인 버튼 누르면
-    }
-
     if (e.target.className === 'todo-cancel-button') {
-      console.log('ㅇ');
       // 취소 버튼 누르면
       $todoButtons.style.display = 'block';
       $modifyButtons.style.display = 'none';
@@ -139,11 +131,59 @@
     }
   };
 
+  const modifyTodo = (e) => {
+    // 수정 확인 버튼 누르면
+
+    if (e.target.className === 'todo-ok-button') {
+      const $todo = e.target.closest('.todo');
+      const $todoInput = $todo.querySelector('#todo-input');
+      const id = $todo.dataset.id;
+      const title = $todoInput.value;
+
+      fetch(`${API_URL}/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ title }),
+      })
+        .then((response) => {
+          response.json();
+        })
+        .then(() => {
+          getTodos();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else return;
+  };
+
+  const clickCheckbox = (e) => {
+    if (e.target.id !== 'checkbox') return;
+    const completed = e.target.checked;
+    const $todo = e.target.closest('.todo');
+    const id = $todo.dataset.id;
+
+    fetch(`${API_URL}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ completed }),
+    })
+      .then((response) => response.json())
+      .then(() => getTodos())
+      .catch((error) => console.error(error));
+  };
+
   const init = () => {
     window.addEventListener('DOMContentLoaded', getTodos);
     $todoForm.addEventListener('submit', addTodo);
     $todosContainer.addEventListener('click', deleteTodo);
     $todosContainer.addEventListener('click', modifyTodo);
+    $todosContainer.addEventListener('click', changeModifyMode);
+    $todosContainer.addEventListener('click', clickCheckbox);
   };
 
   init();
