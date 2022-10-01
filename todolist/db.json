@@ -6,12 +6,12 @@
       "id": 5
     },
     {
-      "completed": false,
+      "completed": true,
       "title": "추가하기",
       "id": 7
     },
     {
-      "completed": false,
+      "completed": true,
       "title": "ㅎㅎ",
       "id": 8
     },

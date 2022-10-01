@@ -8,6 +8,7 @@
   const $todolist = get('.todos');
   const $todoForm = get('.todo-form');
   const $todosContainer = get('.todos');
+  const $pagination = get('.pagination-bar');
 
   const createTodoElement = (todo) => {
     const { id, title } = todo;
@@ -32,6 +33,45 @@
     // 투두 엘리먼트 동적 생성
     return $todoItem;
   };
+
+  // 페이지네이션
+  let currentPageNumber = 1; // 현재 페이지
+  let totalTodoItem = 53; // 전체 todo 아이템 개수 (원래는 서버에서 받아와야함)
+  const pageCount = 5; // 페이지에서 버튼 몇 개 보여줄지
+  const limit = 5;
+
+  const pagination = () => {
+    let totalPage = Math.ceil(totalTodoItem / limit); // 총 페이지가 몇 페이지인지
+    let pageGroup = Math.ceil(currentPageNumber / pageCount); // 현재 페이지가 몇 페이지 그룹인지
+    let lastNumber = pageGroup * pageCount; // 현재 페이지 그룹 * 한 페이지에 보여줄 카운트를 곱하면 마지막 번호 나옴
+
+    if (lastNumber > totalPage) {
+      lastNumber = totalPage;
+    }
+
+    let firstNumber = lastNumber - (pageCount - 1);
+
+    const next = lastNumber + 1;
+    const prev = firstNumber + 1;
+
+    let pageButtons = '';
+
+    if (prev > 0) {
+      html += `<button class="pagination-btns prev-btn">이전</button>`;
+    }
+
+    for (let i = firstNumber; i <= lastNumber; i++) {
+      html += `<button class="pagination-btns" id="pagebtn_${i}">${i}</button>`;
+    }
+
+    if (lastNumber < totalPage) {
+      html += `<button class="pagination-btns">다음</button>`;
+    }
+
+    $pagination.innerHTML = pageButtons;
+  };
+
+  //
 
   const API_URL = `http://localhost:3000/todos`;
 
