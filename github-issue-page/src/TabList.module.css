@@ -1,0 +1,7 @@
+.tabList {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
