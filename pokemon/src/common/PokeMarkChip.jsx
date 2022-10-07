@@ -20,6 +20,7 @@ const Chip = styled.div`
   font-size: 15px;
   margin-left: auto;
   margin-right: 15px;
+  margin-bottom: 15px;
 `;
 
 const Text = styled.label`

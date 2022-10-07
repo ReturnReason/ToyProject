@@ -41,6 +41,7 @@ const Body = styled.section`
   justify-content-center;
   align-items : center;
   margin: 8px 0;
+  flex : 1 1 auto;
 
 `;
 
