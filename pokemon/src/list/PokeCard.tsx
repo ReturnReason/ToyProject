@@ -1,12 +1,19 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import PokeMarkChip from '../common/PokeMarkChip';
 import PokeNameChip from '../common/PokeNameChip';
 
 const TempImgUrl = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcoZEeyzKdjsIIDAz9E69XPROL3WBPLtg0Aw&usqp=CAU`;
 
 const PokeCard = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/pokemon/${'metamong'}`);
+  };
+
   return (
-    <Item>
+    <Item onClick={handleClick}>
       <Header>
         <PokeNameChip />
       </Header>
@@ -29,6 +36,17 @@ const Item = styled.li`
   border-radius: 5px;
   box-shadow: 0 0 15px #eee;
   padding: 8px;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &:active {
+    border: 1px solid #4f68ff60;
+    box-shadow: 0 0 15px #4f68ff60;
+  }
 `;
 
 const Header = styled.section`
