@@ -5,17 +5,21 @@ import PokeNameChip from '../common/PokeNameChip';
 
 const TempImgUrl = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcoZEeyzKdjsIIDAz9E69XPROL3WBPLtg0Aw&usqp=CAU`;
 
-const PokeCard = () => {
+interface PokeCardProps {
+  name: string;
+}
+
+const PokeCard = (props: PokeCardProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/pokemon/${'metamong'}`);
+    navigate(`/pokemon/${props.name}`);
   };
 
   return (
     <Item onClick={handleClick}>
       <Header>
-        <PokeNameChip />
+        <PokeNameChip name={props.name} />
       </Header>
       <Body>
         <Image src={TempImgUrl} alt="포켓몬" />
