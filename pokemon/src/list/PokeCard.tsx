@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PokeMarkChip from '../common/PokeMarkChip';
 import PokeNameChip from '../common/PokeNameChip';
+import { fetchPokemonDetail, PokemonDetailType } from '../service/pokemonService';
 
 const TempImgUrl = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcoZEeyzKdjsIIDAz9E69XPROL3WBPLtg0Aw&usqp=CAU`;
 
@@ -11,18 +13,30 @@ interface PokeCardProps {
 
 const PokeCard = (props: PokeCardProps) => {
   const navigate = useNavigate();
+  const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
 
   const handleClick = () => {
     navigate(`/pokemon/${props.name}`);
   };
 
+  useEffect(() => {
+    (async () => {
+      const result = await fetchPokemonDetail(props.name);
+      setPokemon(result);
+    })();
+  }, [props.name]);
+
+  if (!pokemon) {
+    return null; // 화면이 로딩 중일때는..?
+  }
+
   return (
     <Item onClick={handleClick}>
       <Header>
-        <PokeNameChip name={props.name} />
+        <PokeNameChip name={pokemon.name} id={pokemon.id} />
       </Header>
       <Body>
-        <Image src={TempImgUrl} alt="포켓몬" />
+        <Image src={pokemon.images.dreamworldFront} alt={pokemon.name} />
       </Body>
       <Footer>
         <PokeMarkChip />
@@ -36,7 +50,7 @@ const Item = styled.li`
   flex-direction: column;
   border: 1px solid #eee;
   width: 250px;
-  height: 300px;
+  // height: 300px;
   border-radius: 5px;
   box-shadow: 0 0 15px #eee;
   padding: 8px;
@@ -62,13 +76,13 @@ const Body = styled.section`
   display: flex;
   justify-content-center;
   align-items : center;
-  margin: 8px 0;
   flex : 1 1 auto;
 
 `;
 
 const Image = styled.img`
-  height: 80%;
+  width: 100%;
+  height: 50%;
   margin: 0 auto;
 `;
 
