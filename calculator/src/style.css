@@ -12,11 +12,15 @@
 }
 
 .result {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  background: #eee;
+  width: 250px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .calc-container {
-  width: 400px;
+  width: 350px;
   height: 450px;
   padding: 50px;
   border: 1px solid #eee;
@@ -31,11 +35,11 @@
 
 .header-btns {
   display: flex;
-  gap: 7px;
+  gap: 5px;
 }
 
 .header-btns button {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   width: 125px;
   height: 30px;
 }
