@@ -1,41 +1,46 @@
 import './style.css';
 
 const Calcurator = {
-  value: 0,
+  value: '0',
 
-  render(inputValue: string | number) {
-    const $result = document.querySelector('#result') as HTMLElement;
-    // const $result = <HTMLDivElement>document.querySelector('#result');
+  // result에 계산기 결과 보여주기
+  render(inputNumber: string | number) {
+    const $result = document.querySelector('#result-btn');
+    const $resultCalc = <HTMLElement>document.querySelector('#result-calc');
 
-    if ($result) {
-      $result.innerText = String(inputValue || this.value);
+    // 숫자 버튼 눌렀을 때 렌더링
+    if ($resultCalc) {
+      if (this.value !== '0') {
+        this.value += String(inputNumber);
+      } else {
+        this.value = String(inputNumber);
+      }
+
+      $resultCalc.innerText = String(this.value);
+
+      console.log(this.value, inputNumber);
     }
   },
 
-  reset() {
-    this.value = 0;
+  // 계산기 0으로 초기화 시키기
+  clear() {
+    this.render(0);
   },
 
-  operator(inputNumber: number) {
-    this.render(inputNumber);
-  },
+  // 초기 세팅
+  init() {
+    const $buttonContainer = document.querySelector('.numbers-container');
+    $buttonContainer?.addEventListener('click', ({ target }) => {
+      if ((target as HTMLDivElement).className !== 'numbers-container') {
+        this.render((target as HTMLButtonElement).innerText);
+      }
+    });
 
-  initEvent() {
-    const $btn = document.querySelector('.calc-items-container');
-    if ($btn) {
-      $btn.addEventListener('click', ({ target }) => {
-        const buttonTxt = (target as HTMLButtonElement).innerText;
-
-        if (buttonTxt === 'clear') {
-          this.reset();
-        } else {
-          if (isNaN(Number(buttonTxt))) return;
-          this.operator(Number(buttonTxt));
-        }
-      });
-    }
+    const $clear = document.querySelector('#clear-btn');
+    $clear?.addEventListener('click', () => {
+      this.clear();
+    });
   },
 };
 
-Calcurator.render(0);
-Calcurator.initEvent();
+Calcurator.init();
