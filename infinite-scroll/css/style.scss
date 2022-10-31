@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card {
+  width: 240px;
+  height: 120px;
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  padding: 20px;
+
+  .card-title {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .card-content {
+    font-size: 14px;
+  }
+}
