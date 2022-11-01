@@ -1,6 +1,8 @@
 const $cardContainer = get('.card-container');
 const $cards = getAll('.card');
+const $skeletonContainer = get('.skeleton-container');
 
+const CREATE_CARD_COUNT = 4;
 let cardImageNumber = 0;
 
 const io = new IntersectionObserver(ioObserver, {
@@ -32,8 +34,34 @@ function makeCard() {
   cardImageNumber += 4;
 }
 
+function makeSkeletonCard() {
+  for (let i = 0; i < CREATE_CARD_COUNT; i++) {
+    const $skeletonCard = document.createElement('div');
+    $skeletonCard.classList.add('skeleton-card');
+
+    $skeletonCard.innerHTML = `
+      <div class="skeleton-card-header"></div>
+      <div class="skeleton-card-title"></div>
+      <div class="skeleton-card-content"></div>
+    `;
+
+    appendCard($skeletonCard);
+  }
+}
+
 function appendCard(cardElem) {
   $cardContainer.appendChild(cardElem);
+}
+
+function removeSkeletonCard() {
+  const $skeletonCards = getAll('.skeleton-card');
+  $skeletonCards.forEach((skeletonCard) => {
+    $cardContainer.removeChild(skeletonCard);
+  });
+}
+
+function loading() {
+  makeSkeletonCard();
 }
 
 function ioObserver(entries) {
@@ -42,14 +70,13 @@ function ioObserver(entries) {
 
     if (entry.isIntersecting) {
       io.unobserve(target);
-      console.log('로딩');
+      loading();
 
       const timer = setTimeout(() => {
         makeCard();
-
-        console.log('로딩 끝');
+        removeSkeletonCard();
         observeLastCard(io, getAll('.card'));
-      }, 100);
+      }, 1000);
     }
   });
 }
