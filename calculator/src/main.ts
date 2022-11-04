@@ -11,15 +11,24 @@ const operatorSymbol = {
   '÷': 'divide',
 };
 
-let currentOperator;
-
 const Calcurator = {
+  prevValue: '0',
   value: '0',
 
   // result에 계산기 결과 보여주기
   render(input: string | number) {
-    const $result = document.querySelector('#result-btn');
+    const $resultBtn = document.querySelector('#result-btn');
     const $resultCalc = <HTMLElement>document.querySelector('#result-calc');
+    const prevInputNumber = this.prevValue;
+
+    console.log(prevInputNumber);
+
+    // if (operatorSymbol[input]) {
+    //   const operator = operatorSymbol[input];
+    //   if (operator === 'multiple') {
+    //     this.value *= Number(prevInputNumber);
+    //   }
+    // }
 
     if ($resultCalc) {
       if (this.value !== '0') {
@@ -30,6 +39,11 @@ const Calcurator = {
 
       $resultCalc.innerText = String(this.value);
     }
+  },
+
+  savePrevNumber(inputNumber: string) {
+    this.prevValue = this.value;
+    this.value = inputNumber;
   },
 
   clear() {
@@ -45,17 +59,20 @@ const Calcurator = {
       }
     });
 
-    const $clear = document.querySelector('#clear-btn');
-    $clear?.addEventListener('click', () => {
-      this.clear();
-    });
-
     const $operators = document.querySelector('.operators');
     $operators?.addEventListener('click', ({ target }) => {
       if ((target as HTMLElement).className !== 'operator') return;
 
-      const operator = (target as HTMLElement).innerHTML;
-      currentOperator = (operatorSymbol as OperatorType)[operator];
+      if (target) {
+        const currentOperator = (target as HTMLElement).innerText;
+        this.savePrevNumber(this.value);
+        this.render(currentOperator);
+      }
+    });
+
+    const $clear = document.querySelector('#clear-btn');
+    $clear?.addEventListener('click', () => {
+      this.clear();
     });
   },
 };
