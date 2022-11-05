@@ -1,5 +1,19 @@
+a {
+  text-decoration: none;
+  color: #1e1e1e;
+}
+
+a:hover {
+  color: var(--violet-color);
+}
+
 .bg {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.8) 100%), url(./background.jpg);
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.9) 50%,
+      rgba(255, 255, 255, 0.8) 100%
+    ),
+    url(../background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -101,6 +115,11 @@
   border: 2px solid var(--violet-color);
   background: transparent;
   color: var(--violet-color);
+  transition: all 0.5s;
+}
+
+.primary-btn:hover {
+  background: #645caa10;
 }
 
 .contents-container {
@@ -114,6 +133,7 @@
   justify-content: center;
   flex-direction: column;
   margin-top: 80px;
+  border-radius: 10px;
 }
 
 .contents-container .line {
