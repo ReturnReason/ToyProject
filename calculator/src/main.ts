@@ -4,6 +4,13 @@ interface OperatorType {
   [key: string]: string;
 }
 
+const $ = (elem: string) => {
+  if (elem) {
+    return document.querySelector(elem);
+  }
+  return;
+};
+
 const operatorSymbol = {
   '＋': 'plus',
   '－': 'minus',
@@ -17,22 +24,17 @@ const Calcurator = {
 
   // result에 계산기 결과 보여주기
   render(input: string | number) {
-    const $resultBtn = document.querySelector('#result-btn');
-    const $resultCalc = <HTMLElement>document.querySelector('#result-calc');
+    const $resultBtn = $('#result-btn');
+    const $resultCalc = <HTMLElement>$('#result-calc');
     const prevInputNumber = this.prevValue;
 
     console.log(prevInputNumber);
 
-    // if (operatorSymbol[input]) {
-    //   const operator = operatorSymbol[input];
-    //   if (operator === 'multiple') {
-    //     this.value *= Number(prevInputNumber);
-    //   }
-    // }
-
     if ($resultCalc) {
-      if (this.value !== '0') {
-        this.value += String(input);
+      if (operatorSymbol[input]) {
+        this.value = Number(this.value);
+      } else if (this.value !== '0') {
+        this.value += Number(input);
       } else {
         this.value = String(input);
       }
@@ -52,14 +54,14 @@ const Calcurator = {
   },
 
   init() {
-    const $buttonContainer = document.querySelector('.numbers-container');
+    const $buttonContainer = $('.numbers-container');
     $buttonContainer?.addEventListener('click', ({ target }) => {
       if ((target as HTMLDivElement).className !== 'numbers-container') {
         this.render((target as HTMLButtonElement).innerText);
       }
     });
 
-    const $operators = document.querySelector('.operators');
+    const $operators = $('.operators');
     $operators?.addEventListener('click', ({ target }) => {
       if ((target as HTMLElement).className !== 'operator') return;
 
@@ -70,7 +72,7 @@ const Calcurator = {
       }
     });
 
-    const $clear = document.querySelector('#clear-btn');
+    const $clear = $('#clear-btn');
     $clear?.addEventListener('click', () => {
       this.clear();
     });
