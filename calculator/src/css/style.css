@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bg {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.result {
+  margin-bottom: 10px;
+  background: #eee;
+  width: 250px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 2rem;
+  text-align: right;
+}
+
+.calculator {
+  width: 350px;
+  height: 450px;
+  padding: 50px;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px #eee;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pad-container {
+  display: grid;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  grid-template-areas:
+    'ac ac c equal'
+    'num7 num8 num9 division'
+    'num4 num5 num6 multiplication'
+    'num1 num2 num3 minus'
+    'num0 num0 num0 plus';
+}
+
+.pad {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #eee;
+  font-size: 1.2rem;
+}
+
+.pad:hover {
+  background-color: #dedede;
+}
+
+.operator {
+  background: #ffdcdc;
+}
+
+.operator:hover {
+  background: #ffc4c4;
+}
+
+.ac {
+  grid-area: ac;
+}
+
+.c {
+  grid-area: c;
+}
+
+.number1 {
+  grid-area: num1;
+}
+
+.number2 {
+  grid-area: num2;
+}
+
+.number3 {
+  grid-area: num3;
+}
+
+.number4 {
+  grid-area: num4;
+}
+
+.number5 {
+  grid-area: num5;
+}
+
+.number6 {
+  grid-area: num6;
+}
+
+.number0 {
+  grid-area: num0;
+}
+
+.division {
+  grid-area: division;
+}
+
+.multiplication {
+  grid-area: multiplication;
+}
+
+.minus {
+  grid-area: minus;
+}
+
+.plus {
+  grid-area: plus;
+}
+
+.equal-sign {
+  grid-area: equal;
+}
