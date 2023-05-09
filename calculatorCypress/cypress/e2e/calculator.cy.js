@@ -11,4 +11,10 @@ describe('💙 계산기 앱 테스트', () => {
     cy.get('.digit').contains('1').click();
     cy.get('#total').should('have.text', 1);
   });
+
+  it('✅ 숫자 버튼 2개를 클릭하면 디스플레이에 숫자 2개가 나타납니다.', () => {
+    cy.get('.digit').contains('1').click();
+    cy.get('.digit').contains('2').click();
+    cy.get('#total').should('have.text', 12);
+  });
 });
