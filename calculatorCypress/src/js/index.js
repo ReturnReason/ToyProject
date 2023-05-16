@@ -9,9 +9,12 @@ const $digits = $('.digits');
 const $total = $('#total');
 
 const handleDigitClick = (e) => {
-  if (e.target.classList.contains('digit')) {
-    $total.innerText = e.target.innerText;
-  }
+  if (!e.target.classList.contains('digit')) return;
+
+  const currentTotal = $total.innerText;
+  const newDigit = e.target.innerText;
+
+  $total.innerText = currentTotal === '0' ? newDigit : currentTotal + newDigit;
 };
 
 function App() {
